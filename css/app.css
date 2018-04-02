@@ -1,0 +1,369 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/playstation.png');
+    font-family: 'Nunito', 'Coda', cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: 'Nunito', 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #f5a151;
+    margin-bottom: 0;
+}
+.design {
+    background-color: #fbdc5f;
+	font-size: 14px;
+	display: inline-block;
+	margin: 0 auto;
+	width: 80px;
+    height: 26px;
+	font-family: 'Nunito', cursive;
+	color: #404a51;
+	border-radius: 3px;
+    text-align: center;
+    vertical-align: middle;
+    box-shadow: none;
+}
+/*
+ * Deck of cards
+ */
+
+.deck {
+    width: 90%;
+    background: linear-gradient(160deg, #fbdc5f 0%, #fc9c66 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+}
+
+.deck .card {
+    background: #404a51;
+    cursor: pointer;
+    height: 125px;
+    width: 125px;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.open {
+    background: #f49538;
+    cursor: default;
+    transform: rotateY(0);
+	animation-name: flipInY;
+	-webkit-backface-visibility: visible !important;
+	backface-visibility: visible !important;
+	animation-duration: .85s;
+}
+
+.deck .card.show {
+    font-size: 40px;
+}
+
+.deck .card.match {
+    background: #92c94a;
+    cursor: default;
+    font-size: 33px;
+    animation-name: rubberBand;
+	-webkit-backface-visibility: visible !important;
+	backface-visibility: visible !important;
+	animation-duration: .85s;
+}
+
+.deck .card.unmatched {
+    background: #eb6937;
+	animation-name: pulse;
+	-webkit-backface-visibility: visible !important;
+	backface-visibility: visible !important;
+	animation-duration: .7s;
+}
+
+.deck .card.disabled {
+	pointer-events: none;
+	opacity: 0.8;
+}
+
+/*
+ * Score Panel
+ */
+
+.score-panel {
+    text-align: center;
+    width: 500px;
+    margin-bottom: 10px;
+}
+
+#greetings {
+    font-family: 'Nunito', 'Open Sans', sans-serif;
+    font-weight:300;
+    color: #F2C14E;
+    font-size: 16px;
+    text-align: center;
+}
+
+.timer {
+	display: inline-block;
+	margin: 0 1rem;
+}
+
+
+.score-panel .stars {
+    padding: 0 10px 0 30px;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
+}
+
+.fa-star {
+	color: #F2C14E;
+}
+
+
+/*
+ * Congratulations
+ */
+
+.overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.7);
+	transition: opacity 500ms;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.overlay:target {
+	visibility: visible;
+	opacity: 1;
+}
+  
+.results {
+	margin: 70px auto;
+	padding: 20px;
+	background: #ffffff;
+	border-radius: 5px;
+	width: 70%;
+	position: relative;
+	transition: all 5s ease-in-out;
+	font-family: 'Nunito', cursive;
+}
+  
+.results h2 {
+	margin-top: 0;
+	color: #333;
+	font-family: Tahoma, Arial, sans-serif;
+}
+
+.results .close {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	transition: all 200ms;
+	font-size: 30px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #333;
+}
+
+.results .close:hover {
+	color: #E5F720;
+}
+
+.results .congrats, 
+.statistics {
+	max-height: 35%;
+	overflow: auto;
+	text-align: center;
+}
+
+.show {
+	visibility: visible !important;
+	opacity: 100 !important;
+}
+
+#starRating li {
+	display: inline-block;
+}
+
+#replay {
+	background-color: #404a51;
+	padding: 0.7rem 1rem;
+	font-size: 1.1rem;
+	display: block;
+	margin: 0 auto;
+	width: 40%;
+	font-family: 'Nunito', cursive;
+	color: #ffffff;
+	border-radius: 5px;
+}
+
+/* Keyframe animation */
+@keyframes flipInY {
+	from {
+		transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+		animation-timing-function: ease-in;
+		opacity: 0;
+	}
+	40% {
+		transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+		animation-timing-function: ease-in;
+	}
+	60% {
+		transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+		opacity: 1;
+	}
+	80% {
+		transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+	}
+	to {
+		transform: perspective(400px);
+	}
+}
+
+@keyframes pulse {
+	from {
+		transform: scale3d(1, 1, 1);
+	}
+	50% {
+		transform: scale3d(1.2, 1.2, 1.2);
+	}
+	to {
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+@keyframes rubberBand {
+	from {
+		transform: scale3d(1, 1, 1);
+	}
+	30% {
+		transform: scale3d(1.25, 0.75, 1);
+	}
+	40% {
+		transform: scale3d(0.75, 1.25, 1);
+	}
+	50% {
+		transform: scale3d(1.15, 0.85, 1);
+	}
+	65% {
+		transform: scale3d(.95, 1.05, 1);
+	}
+	75% {
+		transform: scale3d(1.05, .95, 1);
+	}
+	to {
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+
+
+@media (max-width: 459px) {
+	.deck {
+		width: 95%;
+	}
+
+	.deck .card {
+		height: 60px;
+		width: 60px;
+        margin: 0.5rem;
+	}
+    
+    .score-panel .stars {
+    padding: 0 10px 0 20px;
+    display: inline-block;
+    margin: 0 auto;
+}
+    .score-panel {
+    width: 340px;
+}
+}
+
+@media (min-width: 460px) and (max-width: 760px) {
+	.deck {
+		width: 80%;
+	}
+
+	.deck .card {
+		height: 90px;
+		width: 90px;
+        margin: 0.5rem;
+	}
+    
+    .score-panel .stars {
+    padding: 0 10px 0 20px;
+    display: inline-block;
+    margin: 0 auto;
+}
+    .score-panel {
+    width: 340px;
+}
+}
+
+
+@media (min-width: 761px) {
+	.container {
+		font-size: 22px;
+	}
+
+	.deck {
+		width: 660px;
+		height: 680px;
+	}
+
+	.deck .card {
+		height: 125px;
+		width: 125px;
+	}
+
+	.popup {
+		width: 60%;
+	}
+}
+
+
