@@ -2,9 +2,9 @@
 
 ## Table of Contents
 
-* [About the game](#aboutthegame)
-* [Instructions](#instructions)
-* [Used Languages](#usedlanguages)
+* About the game
+* Instructions
+* Used Languages
 
 ## About the Game
 
