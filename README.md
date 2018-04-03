@@ -4,7 +4,7 @@
 
 * [About the game](#aboutthegame)
 * [Instructions](#instructions)
-* [Instructions](#usedlanguages)
+* [Used Languages](#usedlanguages)
 
 ## About the Game
 
